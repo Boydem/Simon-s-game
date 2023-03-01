@@ -1,0 +1,50 @@
+button,
+a {
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: 0;
+    color: $base-text-color;
+    &.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        &:hover {
+            border: 0;
+        }
+        &:active {
+        }
+        &.circled {
+            border-radius: 155px;
+        }
+        &.rounded {
+            border-radius: 0.25rem;
+        }
+        &.small {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.9rem;
+        }
+        &.medium {
+            font-size: 1rem;
+            padding: 0.6rem 1.8rem;
+        }
+        &.large {
+            font-size: 1.15rem;
+            padding: 1rem 3rem;
+        }
+        &.primary {
+            color: $base-text-color;
+            background-color: $primary;
+            &:hover {
+                background-color: $primary-highlighted;
+            }
+        }
+        &.secondary {
+            color: $base-text-color;
+            background-color: $secondary;
+            &:hover {
+                background-color: $secondary-highlighted;
+            }
+        }
+    }
+}

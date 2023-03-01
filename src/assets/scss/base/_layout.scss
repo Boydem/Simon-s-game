@@ -1,0 +1,10 @@
+.main-layout {
+    display: grid;
+    grid-template-columns: $layout-padding 1fr $layout-padding;
+    > * {
+        grid-column: 2;
+    }
+    .full {
+        grid-column: 1 / -1;
+    }
+}

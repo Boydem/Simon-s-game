@@ -1,0 +1,55 @@
+// COLOR PALETTE
+$dark: #222;
+$light: #ebebeb;
+$gray-200: #212121;
+$gray-300: #313131;
+$gray-400: #414141;
+$gray-500: #515151;
+$gray-600: #616161;
+$gray-700: #717171;
+$gray-B: #b7b7b7;
+$gray-D: #dbdbdb;
+
+$clr-1: rgb(60, 226, 60);
+$clr-2: rgb(212, 52, 52);
+$clr-3: rgb(255, 221, 31);
+$clr-4: rgb(36, 46, 180);
+
+$primary: #ff385c;
+$primary-highlighted: #f13b69;
+$secondary: #3877ff;
+$secondary-highlighted: #538aff;
+$primary-gradient: radial-gradient(
+    circle at center,
+    #ff385c 0%,
+    #e61e4d 27.5%,
+    #e31c5f 40%,
+    #d70466 57.5%,
+    #bd1e59 75%,
+    #bd1e59 100%
+);
+
+$text-muted: $gray-700;
+
+// BASE FONT SETUP
+$base-font-family: 'Roboto', Arial, Helvetica, sans-serif;
+$base-font-size: 15px;
+$base-font-ratio: 1.43;
+
+// BASE COLORS SETUP
+$base-bg-color: $dark;
+$base-text-color: $light;
+$base-muted-color: $gray-B;
+
+// FIXED SIZES
+$header-height-desktop: 80px;
+
+// LAYOUT
+$layout-padding: 40px;
+
+// LAYOUT BREAKPOINTS
+$break-narrow: 768px;
+$break-normal: 1120px;
+
+$padded-break-narrow: $break-narrow + $layout-padding * 2;
+$padded-break-normal: $break-normal + $layout-padding * 2;
