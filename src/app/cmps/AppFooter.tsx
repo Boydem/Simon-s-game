@@ -1,7 +1,7 @@
 export function AppFooter() {
     return (
         <footer className='app-footer main-layout'>
-            <p>This Simon Game Created By Noam Dahan</p>
+            <p>Copyright © 2023 Noam Dahan. All rights reserved.</p>
         </footer>
     )
 }

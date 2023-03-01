@@ -3,7 +3,7 @@ a {
     cursor: pointer;
     transition: 0.2s ease;
     border: 0;
-    color: $base-text-color;
+    color: $gray-D;
     &.btn {
         display: inline-flex;
         align-items: center;
@@ -33,14 +33,12 @@ a {
             padding: 1rem 3rem;
         }
         &.primary {
-            color: $base-text-color;
             background-color: $primary;
             &:hover {
                 background-color: $primary-highlighted;
             }
         }
         &.secondary {
-            color: $base-text-color;
             background-color: $secondary;
             &:hover {
                 background-color: $secondary-highlighted;

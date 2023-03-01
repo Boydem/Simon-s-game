@@ -1,6 +1,8 @@
-import { LegacyRef, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const colors: string[] = ['green', 'red', 'yellow', 'blue']
+const SHOW_HIGHLIGHT_TIME = 250
+const SHOW_HIGHLIGHT_DELAY = 1000
 
 // * Sound Effects *
 const sounds: { [key: string]: HTMLAudioElement } = {
@@ -21,36 +23,43 @@ export const Home = () => {
 
     useEffect(() => {
         if (!isGameOn) return
-        const randomNum: number = Math.floor(Math.random() * 3)
-        sequence.current.push(randomNum)
-
-        function hilghlightBtn(colorIdx: number, sequenceCount: number) {
-            gameBtnsRefs.current[colorIdx]?.classList.add('active')
-            playSound(colorIdx)
-            timeoutIds.current.push(
-                setTimeout(() => {
-                    gameBtnsRefs.current[colorIdx]?.classList.remove('active')
-                    if (sequenceCount === sequence.current.length - 1) {
-                        setIsPlayerMove(true)
-                    }
-                }, 250)
-            )
-        }
-
-        for (let i = 0; i < level; i++) {
-            const timeoutId = setTimeout(
-                () => {
-                    hilghlightBtn(sequence.current[i], i)
-                },
-                i === 0 ? 1000 : 1000 + i * 1000
-            ) // Use a longer delay for the first button activation
-            timeoutIds.current.push(timeoutId)
-        }
+        addNextLevel()
+        highlightSequence()
 
         return () => {
             clearTimeOuts()
         }
     }, [level, isGameOn])
+
+    function addNextLevel() {
+        const randomNum: number = Math.floor(Math.random() * 3)
+        sequence.current.push(randomNum)
+    }
+
+    function highlightSequence() {
+        for (let i = 0; i < level; i++) {
+            const timeoutId = setTimeout(
+                () => {
+                    hilghlightBtn(sequence.current[i], i)
+                },
+                i === 0 ? SHOW_HIGHLIGHT_DELAY : SHOW_HIGHLIGHT_DELAY + i * SHOW_HIGHLIGHT_DELAY
+            )
+            timeoutIds.current.push(timeoutId)
+        }
+    }
+
+    function hilghlightBtn(colorIdx: number, sequenceCount: number) {
+        gameBtnsRefs.current[colorIdx]?.classList.add('active')
+        playSound(colorIdx)
+        timeoutIds.current.push(
+            setTimeout(() => {
+                gameBtnsRefs.current[colorIdx]?.classList.remove('active')
+                if (sequenceCount === sequence.current.length - 1) {
+                    setIsPlayerMove(true)
+                }
+            }, SHOW_HIGHLIGHT_TIME)
+        )
+    }
 
     function handleClick(clickedIdx: number): void {
         playSound(clickedIdx)
@@ -67,7 +76,8 @@ export const Home = () => {
     }
 
     function playSound(index: number) {
-        let sound = sounds[Object.keys(sounds)[index]]
+        let color = Object.keys(sounds)[index]
+        let sound = sounds[color]
         sound.currentTime = 0
         sound.volume = 0.1
         sound.play()

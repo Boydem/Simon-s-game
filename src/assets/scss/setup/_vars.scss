@@ -1,6 +1,15 @@
+:root {
+    --dark: #333;
+    --light: #dbdbdb;
+    &.light-mode {
+        --dark: #dbdbdb;
+        --light: #333;
+    }
+}
+
 // COLOR PALETTE
-$dark: #222;
-$light: #ebebeb;
+$dark: var(--dark);
+$light: var(--light);
 $gray-200: #212121;
 $gray-300: #313131;
 $gray-400: #414141;

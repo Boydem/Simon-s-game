@@ -4,10 +4,10 @@
     align-items: center;
     justify-content: center;
     .board {
-        box-shadow: inset 0px 0px 1.5rem -0.5rem lighten($dark, 5%), 0px 0px 3rem 0.5rem darken($dark, 5%);
-        padding: 1.5rem;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+        background-color: #222;
         border-radius: 1000px;
-        background-color: darken($dark, 5%);
+        padding: 1rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
@@ -30,22 +30,24 @@
             }
         }
         .game-btn {
-            $hover-shadow: 0px 0px 20px 5px;
+            $hover-shadow: 0px 0px 30px 5px;
             height: 200px;
             min-width: 200px;
-            box-shadow: #111111b0;
             border-radius: 0.25rem;
-
+            transition: all 0.3s ease;
             &[disabled] {
                 cursor: not-allowed;
             }
             &:hover:not([disabled]) {
                 transform: scale(1.015);
-                opacity: 0.89;
+                filter: brightness(115%);
             }
             &:active:not([disabled]) {
                 transform: scale(0.985);
                 opacity: 1;
+            }
+            &.active {
+                transform: scale(0.985);
             }
             &.green {
                 border-radius: 100% 0 0 100%/100% 100% 0 0;
@@ -54,7 +56,7 @@
                 border-bottom-left-radius: 0.5rem;
                 &:active:not([disabled]),
                 &.active {
-                    background-color: lighten($clr-1, 10%);
+                    background-color: lighten($clr-1, 12%);
                     box-shadow: $hover-shadow rgba($clr-1, 50%);
                 }
             }
@@ -65,7 +67,7 @@
                 border-bottom-right-radius: 0.5rem;
                 &:active:not([disabled]),
                 &.active {
-                    background-color: lighten($clr-2, 10%);
+                    background-color: lighten($clr-2, 12%);
                     box-shadow: $hover-shadow rgba($clr-2, 50%);
                 }
             }
@@ -76,7 +78,7 @@
                 border-top-left-radius: 0.5rem;
                 &:active:not([disabled]),
                 &.active {
-                    background-color: lighten($clr-3, 10%);
+                    background-color: lighten($clr-3, 12%);
                     box-shadow: $hover-shadow rgba($clr-3, 50%);
                 }
             }
@@ -87,7 +89,7 @@
                 border-top-right-radius: 0.5rem;
                 &:active:not([disabled]),
                 &.active {
-                    background-color: lighten($clr-4, 10%);
+                    background-color: lighten($clr-4, 12%);
                     box-shadow: $hover-shadow rgba($clr-4, 50%);
                 }
             }
@@ -103,10 +105,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: #111;
+            background-color: #222;
+            color: $gray-D;
             border-radius: 100px;
             cursor: default;
-            box-shadow: 0px 0px 30px -10px $dark;
+            box-shadow: 0px 0px 30px -10px #111;
         }
     }
 }
