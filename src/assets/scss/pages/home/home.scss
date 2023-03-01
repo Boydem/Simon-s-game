@@ -11,12 +11,31 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
+        position: relative;
+        .modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: $dark;
+            padding: 3rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            button {
+                width: 100%;
+            }
+        }
         .game-btn {
             $hover-shadow: 0px 0px 10px 5px;
             height: 200px;
             min-width: 200px;
             box-shadow: #111111b0;
             &:hover {
+                transform: scale(1.015);
                 opacity: 0.89;
             }
             &:active {
@@ -26,28 +45,32 @@
             &.green {
                 border-radius: 100% 0 0 100%/100% 100% 0 0;
                 background-color: $clr-1;
-                &:hover {
+                &:active,
+                &.active {
                     box-shadow: $hover-shadow rgba($clr-1, 50%);
                 }
             }
             &.red {
                 border-radius: 0 100% 0 100% /100% 100% 0 0;
                 background-color: $clr-2;
-                &:hover {
+                &:active,
+                &.active {
                     box-shadow: $hover-shadow rgba($clr-2, 50%);
                 }
             }
             &.yellow {
                 border-radius: 100% 0 0 100%/0 100% 0 100%;
                 background-color: $clr-3;
-                &:hover {
+                &:active,
+                &.active {
                     box-shadow: $hover-shadow rgba($clr-3, 50%);
                 }
             }
             &.blue {
                 border-radius: 0 100% 100% 0 / 100% 0 100% 0;
                 background-color: $clr-4;
-                &:hover {
+                &:active,
+                &.active {
                     box-shadow: $hover-shadow rgba($clr-4, 50%);
                 }
             }

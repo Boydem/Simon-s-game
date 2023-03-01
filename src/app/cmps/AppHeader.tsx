@@ -1,5 +1,5 @@
 export function AppHeader() {
-    const title = `Simon's Game`
+    const title = `Simon Says`
     return (
         <header className='app-header main-layout'>
             <div className='wrapper'>
