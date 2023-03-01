@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/simon-s-game/static/css/main.f1df3248.css",
+    "main.js": "/simon-s-game/static/js/main.14e327bb.js",
+    "index.html": "/simon-s-game/index.html",
+    "main.f1df3248.css.map": "/simon-s-game/static/css/main.f1df3248.css.map",
+    "main.14e327bb.js.map": "/simon-s-game/static/js/main.14e327bb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f1df3248.css",
+    "static/js/main.14e327bb.js"
+  ]
+}
