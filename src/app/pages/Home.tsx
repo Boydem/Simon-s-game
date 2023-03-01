@@ -20,11 +20,6 @@ export const Home = () => {
     const playerClick = useRef<number>(0)
 
     useEffect(() => {
-        document.body.focus()
-    }, [])
-
-    console.log('isPlayerMove:', isPlayerMove)
-    useEffect(() => {
         if (!isGameOn) return
         const randomNum: number = Math.floor(Math.random() * 3)
         sequence.current.push(randomNum)
@@ -35,10 +30,7 @@ export const Home = () => {
             timeoutIds.current.push(
                 setTimeout(() => {
                     gameBtnsRefs.current[colorIdx]?.classList.remove('active')
-                    console.log('colorIdx:', colorIdx)
-                    console.log('sequence.current.length - 1:', sequence.current.length - 1)
                     if (sequenceCount === sequence.current.length - 1) {
-                        console.log('hello:')
                         setIsPlayerMove(true)
                     }
                 }, 250)
@@ -55,21 +47,16 @@ export const Home = () => {
             timeoutIds.current.push(timeoutId)
         }
 
-        console.log('randomNums.current:', sequence.current)
         return () => {
             clearTimeOuts()
         }
     }, [level, isGameOn])
 
     function handleClick(clickedIdx: number): void {
-        console.log('clickedIdx:', clickedIdx)
-        console.log('randomNums.current[clickCount.current]:', sequence.current[playerClick.current])
         playSound(clickedIdx)
         if (isCorrectMove(clickedIdx)) {
             playerClick.current++
-            console.log('clickCount.current:', playerClick.current)
             if (playerClick.current === level) {
-                console.log('LEVEL UPPPPP**************************:')
                 playerClick.current = 0
                 setIsPlayerMove(false)
                 setLevel(prev => prev + 1)
