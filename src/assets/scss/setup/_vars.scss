@@ -1,12 +1,12 @@
 :root {
     --dark: #222;
     --light: #dbdbdb;
-    --dark2: rgba(85, 85, 85, 0.973);
+    --dark2: rgba(85, 85, 85, 0.911);
     --light2: #cacaca;
     &.light-mode {
-        --dark: #b3b3b3;
+        --dark: #c0c0c0;
         --light: #333;
-        --dark2: #757575e7;
+        --dark2: #fafafacc;
         --light2: #202020;
     }
 }
@@ -30,22 +30,6 @@ $clr-2: rgb(212, 52, 52);
 $clr-3: rgb(255, 221, 31);
 $clr-4: rgb(36, 46, 180);
 
-$primary: #ff385c;
-$primary-highlighted: #f13b69;
-$secondary: #3877ff;
-$secondary-highlighted: #538aff;
-$primary-gradient: radial-gradient(
-    circle at center,
-    #ff385c 0%,
-    #e61e4d 27.5%,
-    #e31c5f 40%,
-    #d70466 57.5%,
-    #bd1e59 75%,
-    #bd1e59 100%
-);
-
-$text-muted: $gray-700;
-
 // BASE FONT SETUP
 $base-font-family: 'Roboto', Arial, Helvetica, sans-serif;
 $base-font-size: 15px;
@@ -56,15 +40,10 @@ $base-bg-color: $dark;
 $base-text-color: $light;
 $base-muted-color: $gray-B;
 
-// FIXED SIZES
-$header-height-desktop: 80px;
-
 // LAYOUT
 $layout-padding: 5vw;
 
 // LAYOUT BREAKPOINTS
 $break-narrow: 640px;
-$break-normal: 1120px;
 
 $padded-break-narrow: calc($break-narrow + $layout-padding * 2);
-$padded-break-normal: calc($break-normal + $layout-padding * 2);

@@ -143,12 +143,12 @@ $hover-shadow: 0px 0px 30px 5px;
     top: 50%;
     left: 50%;
     width: 90%;
-    max-width: 500px;
+    max-width: 600px;
     transform: translate(-50%, -50%);
-    background-color: rgba(#222, 90%);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    padding: 3rem 2rem;
+    background-color: $dark2;
+    color: $light;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -157,12 +157,38 @@ $hover-shadow: 0px 0px 30px 5px;
     gap: 0.5rem;
     z-index: 99;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    padding: 2rem 1rem;
+    @media (min-width: $padded-break-narrow) {
+        padding: 3rem;
+    }
+    h1 {
+        margin-inline-start: 2.5rem;
+        font-size: 3rem;
+    }
     ul {
+        .item-title {
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+        .item-description {
+            margin-inline: 2.5rem;
+        }
         margin: 2rem 0;
-        gap: 1rem;
+        gap: 1.5rem;
     }
     button {
-        // width: 100%;
+        &:first-child {
+            margin-inline-start: 2.5rem;
+        }
+    }
+    .game-over {
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
     }
 }
 .instructions-button {

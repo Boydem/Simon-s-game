@@ -139,8 +139,8 @@ export const Home = () => {
                         <Instructions resetGame={resetGame} />
                     ) : (
                         <div className='game-over'>
-                            <h2>Game Lost!</h2>
-                            <button onClick={resetGame} className='btn secondary rounded medium'>
+                            <h1>Game Lost!</h1>
+                            <button onClick={resetGame} className='btn primary rounded medium'>
                                 Reset
                             </button>
                         </div>

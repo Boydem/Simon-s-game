@@ -12,7 +12,7 @@ export function AppHeader() {
         <header className='app-header main-layout'>
             <div className='wrapper'>
                 <div className='dark-light-switch'>
-                    <button onClick={toggleDarkMode} className='btn small secondary rounded'>
+                    <button onClick={toggleDarkMode} className='btn small primary rounded'>
                         {darkMode ? 'Dark' : 'Light'}
                     </button>
                 </div>

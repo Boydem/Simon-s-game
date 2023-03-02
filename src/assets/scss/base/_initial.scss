@@ -1,13 +1,17 @@
 html,
 body {
     height: 100%;
+    font-size: calc($base-font-size - 2px);
     line-height: $base-font-ratio;
     font-family: $base-font-family;
     overflow-x: hidden;
+    @media (min-width: $padded-break-narrow) {
+        font-size: $base-font-size;
+    }
 }
 
 body {
-    background: radial-gradient(farthest-corner at 240px -240px, $dark2 -15%, $base-bg-color 55%, $dark2 115%);
+    background: radial-gradient(farthest-corner at 40px -40px, $dark2 -15%, $base-bg-color 55%, $dark2 115%);
     color: $base-text-color;
     min-height: 100vh;
 }
