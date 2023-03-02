@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { Instructions } from '../cmps/Instructions'
 import { Color } from '../interfaces/Color'
+import { User } from '../interfaces/User'
+import { simonService } from '../services/simonsays.service'
 import { utilService } from '../services/util.service'
+import Lottie from 'lottie-react'
+import confettiAnimation from '../../assets/images/lottie/confetti.json'
 
 const colors: Color[] = [
     { name: 'green', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3') },
@@ -14,15 +18,40 @@ const SHOW_HIGHLIGHT_TIME = 250
 const SHOW_HIGHLIGHT_DELAY = 1000
 const WRONG_SOUND = new Audio('https://res.cloudinary.com/dsperrtyj/video/upload/v1677759437/wrong_xyf7uj.wav')
 const CORRECT_SOUND = new Audio('https://res.cloudinary.com/dsperrtyj/video/upload/v1677759436/correct_ranvto.wav')
+const NEW_SCORE_SOUND = new Audio('https://res.cloudinary.com/dsperrtyj/video/upload/v1677796731/new-score2_irvwx9.wav')
 
 export const Home = () => {
     const [level, setLevel] = useState<number>(0)
+    const [bestScore, setBestScore] = useState<number>(0)
     const [isGameOn, setIsGameOn] = useState(false)
     const [isPlayerMove, setIsPlayerMove] = useState(false)
     const [isInstructionOpen, setIsInstructionsOpen] = useState(false)
     const sequence = useRef<Color[]>([])
     const gameBoardRef = useRef<HTMLDivElement>(null)
     const playerClick = useRef<number>(0)
+    const isNewBestScore = useRef<boolean>(false)
+
+    useEffect(() => {
+        if (bestScore <= 1) return
+        ;(async () => {
+            try {
+                await simonService.setBestScore(bestScore)
+            } catch (error) {
+                console.error(error)
+            }
+        })()
+    }, [bestScore])
+
+    useEffect(() => {
+        ;(async () => {
+            try {
+                const userScore: { [key: string]: number } = await simonService.getUserScore()
+                setBestScore(userScore.bestScore)
+            } catch (error) {
+                console.error(error)
+            }
+        })()
+    }, [])
 
     useEffect(() => {
         if (!isGameOn) return
@@ -66,7 +95,11 @@ export const Home = () => {
             playSound(color.sound)
             return
         }
-        playSound(WRONG_SOUND)
+        if (level - 1 > bestScore) {
+            playSound(NEW_SCORE_SOUND)
+            setBestScore(level)
+            isNewBestScore.current = true
+        } else playSound(WRONG_SOUND)
         setIsGameOn(false)
     }
 
@@ -97,7 +130,9 @@ export const Home = () => {
 
     function resetGame(): void {
         playerClick.current = 0
+        isNewBestScore.current = false
         sequence.current = []
+        setIsPlayerMove(false)
         setIsGameOn(true)
         setLevel(1)
         setIsInstructionsOpen(false)
@@ -124,22 +159,34 @@ export const Home = () => {
                         <Instructions resetGame={resetGame} closeModal={() => setIsInstructionsOpen(false)} />
                     </div>
                 ) : (
-                    <button
-                        disabled={!isGameOn}
-                        onClick={() => setIsInstructionsOpen(true)}
-                        className='instructions-button btn secondary rounded medium'
-                    >
-                        Instructions
-                    </button>
+                    <>
+                        {isGameOn && (
+                            <>
+                                <button
+                                    onClick={() => setIsInstructionsOpen(true)}
+                                    className='instructions-button btn secondary rounded medium'
+                                >
+                                    Instructions
+                                </button>
+                                <span className='best-score'>Best Score: {bestScore}</span>
+                            </>
+                        )}
+                    </>
                 )}
             </div>
             {!isGameOn && (
-                <div className='modal'>
+                <div className={`modal ${isNewBestScore.current ? 'new-best' : ''}`}>
                     {!isGameOn && level === 0 ? (
                         <Instructions resetGame={resetGame} />
                     ) : (
                         <div className='game-over'>
                             <h1>Game Lost!</h1>
+                            {isNewBestScore.current && <p className='new-score-msg'>But hey, New best score </p>}
+                            {isNewBestScore.current && (
+                                <Lottie className='lottie-wrapper' animationData={confettiAnimation} loop={true}>
+                                    <p className='new-score'>{bestScore}</p>
+                                </Lottie>
+                            )}
                             <button onClick={resetGame} className='btn primary rounded medium'>
                                 Reset
                             </button>

@@ -1,13 +1,13 @@
 :root {
     --dark: #222;
     --light: #dbdbdb;
-    --dark2: rgba(85, 85, 85, 0.911);
-    --light2: #cacaca;
+    --dark2: rgba(7, 7, 7, 0.95);
+    --light2: #dadadaa9;
     &.light-mode {
         --dark: #c0c0c0;
         --light: #333;
         --dark2: #fafafacc;
-        --light2: #202020;
+        --light2: #202020a9;
     }
 }
 

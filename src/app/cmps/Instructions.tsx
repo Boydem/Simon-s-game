@@ -12,7 +12,7 @@ const instructions: { [key: string]: string }[] = [
 export function Instructions({ resetGame, closeModal }: { [key: string]: (() => void) | undefined }) {
     return (
         <div className='instructions'>
-            <h1>Simon Says!</h1>
+            <h1 className='title'>Simon Says!</h1>
             <ul className='clean-list flex column'>
                 {instructions.map((item, idx) => (
                     <li key={`i-${idx}`}>

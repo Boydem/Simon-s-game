@@ -34,15 +34,15 @@ a {
         }
         &.primary {
             color: $dark;
-            background-color: $light;
+            background-color: $light2;
             &:hover {
-                background-color: $light2;
+                background-color: $light;
             }
         }
         &.secondary {
             color: $light;
             background-color: transparent;
-            border: $light 1px solid;
+            border: $light2 1px solid;
             &:hover {
                 border: $light 1px solid;
                 background-color: transparent;
