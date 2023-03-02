@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Instructions } from '../cmps/Instructions'
 import { Color } from '../interfaces/Color'
-import { User } from '../interfaces/User'
 import { simonService } from '../services/simonsays.service'
 import { utilService } from '../services/util.service'
 import Lottie from 'lottie-react'
