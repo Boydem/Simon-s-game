@@ -14,6 +14,8 @@ const colors: Color[] = [
 ]
 const SHOW_HIGHLIGHT_TIME = 250
 const SHOW_HIGHLIGHT_DELAY = 1000
+const WRONG_SOUND = new Audio('https://res.cloudinary.com/dsperrtyj/video/upload/v1677759437/wrong_xyf7uj.wav')
+const CORRECT_SOUND = new Audio('https://res.cloudinary.com/dsperrtyj/video/upload/v1677759436/correct_ranvto.wav')
 
 export const Home = () => {
     const [level, setLevel] = useState<number>(1)
@@ -55,24 +57,42 @@ export const Home = () => {
         gameBoardRef.current?.classList.remove(color.name)
     }
 
-    function handleClick(color: Color): void {
-        playSound(color.sound)
+    async function handleClick(color: Color) {
         if (isCorrectMove(color.name)) {
             playerClick.current++
             if (playerClick.current === level) {
                 playerClick.current = 0
                 setIsPlayerMove(false)
+                playSoundSequentially([color.sound, CORRECT_SOUND])
+                await utilService.delay(500)
                 setLevel(prev => prev + 1)
+                return
             }
+            playSound(color.sound)
             return
         }
+        playSound(WRONG_SOUND)
         setIsGameOn(false)
     }
 
-    function playSound(colorSound: HTMLAudioElement) {
-        colorSound.currentTime = 0
-        colorSound.volume = 0.1
-        colorSound.play()
+    function playSound(audioEl: HTMLAudioElement) {
+        audioEl.currentTime = 0
+        audioEl.volume = 0.1
+        audioEl.play()
+    }
+
+    function playSoundSequentially(audioElements: HTMLAudioElement[]) {
+        if (audioElements.length === 0) {
+            return
+        }
+        const audioEl = audioElements.shift()!
+        audioEl.currentTime = 0
+        audioEl.volume = 0.1
+        audioEl.addEventListener('ended', () => {
+            playSoundSequentially(audioElements)
+        })
+
+        audioEl.play()
     }
 
     function getColor(colorName: string) {

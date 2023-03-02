@@ -7,7 +7,7 @@ body {
 }
 
 body {
-    background: radial-gradient($base-bg-color, hsl(0%, 0%, 25%));
+    background: radial-gradient(farthest-corner at 240px -240px, $dark2 -15%, $base-bg-color 55%, $dark2 115%);
     color: $base-text-color;
     min-height: 100vh;
 }

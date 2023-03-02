@@ -6,12 +6,14 @@ $hover-shadow: 0px 0px 30px 5px;
     align-items: center;
     justify-content: center;
     perspective: 1000px;
-    perspective-origin: 50% 150%;
+    perspective-origin: 50% 250%;
     .board {
+        $BOARD_WIDTH: 600px;
         position: relative;
         -webkit-transform-style: preserve-3d;
         transform-style: preserve-3d;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px, 10px 10px 10px 0px #333, 3px 15px 0px 10px #222;
+        box-shadow: inset 8px 5px 25px 10px #292929, 8px 8px 8px 0px #292929, 5px 10px 15px -5px #ffffff28,
+            5px 20px 0px 15px #1b1b1b, rgba(0, 0, 0, 0.8) 5px 30px 50px 10px;
         background-color: #222;
         border-radius: 1000px;
         padding: 1rem;
@@ -19,16 +21,29 @@ $hover-shadow: 0px 0px 30px 5px;
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
         position: relative;
-        transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(12deg) rotateY(0deg) rotateZ(15deg) translateX(0px)
+        transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(8deg) rotateY(0deg) rotateZ(15deg) translateX(0px)
             translateY(0px) translateZ(0px) skewX(0deg) skewY(0deg);
         margin: auto;
         width: 100%;
         height: 100%;
         max-width: 95vw;
         max-height: 95vw;
+        animation: fallIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        @keyframes fallIn {
+            from {
+                opacity: 0;
+                transform: scaleX(1.35) scaleY(1.35) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(-15deg)
+                    translateX(0px) translateY(-$BOARD_WIDTH) translateZ($BOARD_WIDTH) skewX(0deg) skewY(0deg);
+            }
+            to {
+                opacity: 1;
+                transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(8deg) rotateY(0deg) rotateZ(15deg) translateX(0px)
+                    translateY(0px) translateZ(0px) skewX(0deg) skewY(0deg);
+            }
+        }
         @media (min-width: $padded-break-narrow) {
-            max-width: 500px;
-            max-height: 500px;
+            max-width: $BOARD_WIDTH;
+            max-height: $BOARD_WIDTH;
         }
         &.green .game-btn.green {
             background-color: lighten($clr-1, 12%);

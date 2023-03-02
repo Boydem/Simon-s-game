@@ -1,15 +1,21 @@
 :root {
-    --dark: #333;
+    --dark: #222;
     --light: #dbdbdb;
+    --dark2: rgba(85, 85, 85, 0.973);
+    --light2: #cacaca;
     &.light-mode {
-        --dark: #dbdbdb;
+        --dark: #b3b3b3;
         --light: #333;
+        --dark2: #757575e7;
+        --light2: #202020;
     }
 }
 
 // COLOR PALETTE
 $dark: var(--dark);
+$dark2: var(--dark2);
 $light: var(--light);
+$light2: var(--light2);
 $gray-200: #212121;
 $gray-300: #313131;
 $gray-400: #414141;
