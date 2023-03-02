@@ -43,7 +43,7 @@ Follow the instructions below to get started with the game:
 
 - #### Navigate to http://localhost:4200 in your web browser to view the application
 
-or [View the app in GithubPages](https://boydem.github.io/Simon-s-game/)
+or [View the app in GithubPages](https://boydem.github.io/simon-frontend/)
 
 ## Contributing
 
