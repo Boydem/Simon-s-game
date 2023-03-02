@@ -1,3 +1,5 @@
+$hover-shadow: 0px 0px 30px 5px;
+
 .home {
     display: flex;
     flex-direction: column;
@@ -12,6 +14,22 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
         position: relative;
+        &.green .game-btn.green {
+            background-color: lighten($clr-1, 12%);
+            box-shadow: $hover-shadow rgba($clr-1, 50%);
+        }
+        &.red .game-btn.red {
+            background-color: lighten($clr-2, 12%);
+            box-shadow: $hover-shadow rgba($clr-2, 50%);
+        }
+        &.yellow .game-btn.yellow {
+            background-color: lighten($clr-3, 12%);
+            box-shadow: $hover-shadow rgba($clr-3, 50%);
+        }
+        &.blue .game-btn.blue {
+            background-color: lighten($clr-4, 12%);
+            box-shadow: $hover-shadow rgba($clr-4, 50%);
+        }
         .modal {
             position: absolute;
             top: 50%;
@@ -30,7 +48,6 @@
             }
         }
         .game-btn {
-            $hover-shadow: 0px 0px 30px 5px;
             height: 200px;
             min-width: 200px;
             border-radius: 0.25rem;
@@ -46,16 +63,12 @@
                 transform: scale(0.985);
                 opacity: 1;
             }
-            &.active {
-                transform: scale(0.985);
-            }
             &.green {
                 border-radius: 100% 0 0 100%/100% 100% 0 0;
                 background-color: $clr-1;
                 border-top-right-radius: 0.5rem;
                 border-bottom-left-radius: 0.5rem;
-                &:active:not([disabled]),
-                &.active {
+                &:active:not([disabled]) {
                     background-color: lighten($clr-1, 12%);
                     box-shadow: $hover-shadow rgba($clr-1, 50%);
                 }
@@ -65,8 +78,7 @@
                 background-color: $clr-2;
                 border-top-left-radius: 0.5rem;
                 border-bottom-right-radius: 0.5rem;
-                &:active:not([disabled]),
-                &.active {
+                &:active:not([disabled]) {
                     background-color: lighten($clr-2, 12%);
                     box-shadow: $hover-shadow rgba($clr-2, 50%);
                 }
@@ -87,8 +99,7 @@
                 background-color: $clr-4;
                 border-bottom-left-radius: 0.5rem;
                 border-top-right-radius: 0.5rem;
-                &:active:not([disabled]),
-                &.active {
+                &:active:not([disabled]) {
                     background-color: lighten($clr-4, 12%);
                     box-shadow: $hover-shadow rgba($clr-4, 50%);
                 }
@@ -112,4 +123,7 @@
             box-shadow: 0px 0px 30px -10px #111;
         }
     }
+}
+
+.board {
 }

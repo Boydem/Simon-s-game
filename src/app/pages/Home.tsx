@@ -1,23 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
 
-const colors: string[] = ['green', 'red', 'yellow', 'blue']
+interface Color {
+    name: string
+    sound: HTMLAudioElement
+}
+
+const colors: Color[] = [
+    { name: 'green', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3') },
+    { name: 'red', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3') },
+    { name: 'yellow', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3') },
+    { name: 'blue', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3') },
+]
 const SHOW_HIGHLIGHT_TIME = 250
 const SHOW_HIGHLIGHT_DELAY = 1000
-
-// * Sound Effects *
-const sounds: { [key: string]: HTMLAudioElement } = {
-    green: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
-    red: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
-    blue: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
-    yellow: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'),
-}
 
 export const Home = () => {
     const [level, setLevel] = useState<number>(1)
     const [isGameOn, setIsGameOn] = useState(true)
     const [isPlayerMove, setIsPlayerMove] = useState(false)
-    const sequence = useRef<number[]>([])
-    const gameBtnsRefs = useRef<HTMLButtonElement[]>([])
+    const sequence = useRef<Color[]>([])
+    const gameBoardRef = useRef<HTMLDivElement>(null)
     const timeoutIds = useRef<NodeJS.Timeout[]>([])
     const playerClick = useRef<number>(0)
 
@@ -33,7 +35,8 @@ export const Home = () => {
 
     function addNextLevel() {
         const randomNum: number = Math.floor(Math.random() * 3)
-        sequence.current.push(randomNum)
+        let nextInSequence = colors[randomNum]
+        sequence.current.push(nextInSequence)
     }
 
     function highlightSequence() {
@@ -48,12 +51,12 @@ export const Home = () => {
         }
     }
 
-    function hilghlightBtn(colorIdx: number, sequenceCount: number) {
-        gameBtnsRefs.current[colorIdx]?.classList.add('active')
-        playSound(colorIdx)
+    function hilghlightBtn(color: Color, sequenceCount: number) {
+        gameBoardRef.current?.classList.add(color.name)
+        playSound(color.sound)
         timeoutIds.current.push(
             setTimeout(() => {
-                gameBtnsRefs.current[colorIdx]?.classList.remove('active')
+                gameBoardRef.current?.classList.remove(color.name)
                 if (sequenceCount === sequence.current.length - 1) {
                     setIsPlayerMove(true)
                 }
@@ -61,9 +64,9 @@ export const Home = () => {
         )
     }
 
-    function handleClick(clickedIdx: number): void {
-        playSound(clickedIdx)
-        if (isCorrectMove(clickedIdx)) {
+    function handleClick(color: Color): void {
+        playSound(color.sound)
+        if (isCorrectMove(color.name)) {
             playerClick.current++
             if (playerClick.current === level) {
                 playerClick.current = 0
@@ -75,16 +78,19 @@ export const Home = () => {
         setIsGameOn(false)
     }
 
-    function playSound(index: number) {
-        let color = Object.keys(sounds)[index]
-        let sound = sounds[color]
-        sound.currentTime = 0
-        sound.volume = 0.1
-        sound.play()
+    function playSound(colorSound: HTMLAudioElement) {
+        colorSound.currentTime = 0
+        colorSound.volume = 0.1
+        colorSound.play()
     }
 
-    function isCorrectMove(clickedIdx: number): boolean {
-        return sequence.current[playerClick.current] === clickedIdx
+    function getColor(colorName: string) {
+        return colors.find(color => color.name === colorName)
+    }
+
+    function isCorrectMove(clickedName: string): boolean {
+        let clickedColor = getColor(clickedName)
+        return sequence.current[playerClick.current] === clickedColor
     }
 
     function resetGame() {
@@ -104,18 +110,13 @@ export const Home = () => {
 
     return (
         <div className='home'>
-            <div className='board'>
+            <div ref={gameBoardRef} className='board'>
                 {colors.map((color, idx) => (
                     <button
                         disabled={!isPlayerMove}
                         key={idx}
-                        ref={el => {
-                            if (el && !gameBtnsRefs.current.includes(el)) {
-                                gameBtnsRefs.current.push(el)
-                            }
-                        }}
-                        onClick={() => handleClick(idx)}
-                        className={`game-btn ${color}`}
+                        onClick={() => handleClick(color)}
+                        className={`game-btn ${color.name}`}
                     ></button>
                 ))}
                 <div className='level'>
