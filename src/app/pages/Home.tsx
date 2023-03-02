@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { utilService } from '../services/util.service'
 
 interface Color {
     name: string
@@ -11,7 +12,7 @@ const colors: Color[] = [
     { name: 'yellow', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3') },
     { name: 'blue', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3') },
 ]
-const SHOW_HIGHLIGHT_TIME = 250
+const SHOW_HIGHLIGHT_TIME = 350
 const SHOW_HIGHLIGHT_DELAY = 1000
 
 export const Home = () => {
@@ -25,43 +26,34 @@ export const Home = () => {
 
     useEffect(() => {
         if (!isGameOn) return
-        addNextLevel()
+        addNextToSequence()
         highlightSequence()
-
         return () => {
             clearTimeOuts()
         }
     }, [level, isGameOn])
 
-    function addNextLevel() {
-        const randomNum: number = Math.floor(Math.random() * 3)
+    function addNextToSequence() {
+        const randomNum = Math.floor(Math.random() * 3)
         let nextInSequence = colors[randomNum]
         sequence.current.push(nextInSequence)
     }
 
-    function highlightSequence() {
-        for (let i = 0; i < level; i++) {
-            const timeoutId = setTimeout(
-                () => {
-                    hilghlightBtn(sequence.current[i], i)
-                },
-                i === 0 ? SHOW_HIGHLIGHT_DELAY : SHOW_HIGHLIGHT_DELAY + i * SHOW_HIGHLIGHT_DELAY
-            )
-            timeoutIds.current.push(timeoutId)
+    async function highlightSequence() {
+        for (let i = 0; i < sequence.current.length; i++) {
+            const color = sequence.current[i]
+            await utilService.delay(i === 0 ? SHOW_HIGHLIGHT_DELAY : SHOW_HIGHLIGHT_DELAY - SHOW_HIGHLIGHT_TIME)
+            console.log('playing', color)
+            await hilghlightColor(color)
         }
+        setIsPlayerMove(true)
     }
 
-    function hilghlightBtn(color: Color, sequenceCount: number) {
+    async function hilghlightColor(color: Color) {
         gameBoardRef.current?.classList.add(color.name)
         playSound(color.sound)
-        timeoutIds.current.push(
-            setTimeout(() => {
-                gameBoardRef.current?.classList.remove(color.name)
-                if (sequenceCount === sequence.current.length - 1) {
-                    setIsPlayerMove(true)
-                }
-            }, SHOW_HIGHLIGHT_TIME)
-        )
+        await utilService.delay(SHOW_HIGHLIGHT_TIME)
+        gameBoardRef.current?.classList.remove(color.name)
     }
 
     function handleClick(color: Color): void {
