@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { Instructions } from '../cmps/Instructions'
+import { Color } from '../interfaces/Color'
 import { utilService } from '../services/util.service'
-
-interface Color {
-    name: string
-    sound: HTMLAudioElement
-}
 
 const colors: Color[] = [
     { name: 'green', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3') },
@@ -12,27 +9,25 @@ const colors: Color[] = [
     { name: 'yellow', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3') },
     { name: 'blue', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3') },
 ]
+
 const SHOW_HIGHLIGHT_TIME = 250
 const SHOW_HIGHLIGHT_DELAY = 1000
 const WRONG_SOUND = new Audio('https://res.cloudinary.com/dsperrtyj/video/upload/v1677759437/wrong_xyf7uj.wav')
 const CORRECT_SOUND = new Audio('https://res.cloudinary.com/dsperrtyj/video/upload/v1677759436/correct_ranvto.wav')
 
 export const Home = () => {
-    const [level, setLevel] = useState<number>(1)
-    const [isGameOn, setIsGameOn] = useState(true)
+    const [level, setLevel] = useState<number>(0)
+    const [isGameOn, setIsGameOn] = useState(false)
     const [isPlayerMove, setIsPlayerMove] = useState(false)
+    const [isInstructionOpen, setIsInstructionsOpen] = useState(false)
     const sequence = useRef<Color[]>([])
     const gameBoardRef = useRef<HTMLDivElement>(null)
-    const timeoutIds = useRef<NodeJS.Timeout[]>([])
     const playerClick = useRef<number>(0)
 
     useEffect(() => {
         if (!isGameOn) return
         addNextToSequence()
         highlightSequence()
-        return () => {
-            clearTimeOuts()
-        }
     }, [level, isGameOn])
 
     function addNextToSequence() {
@@ -95,28 +90,17 @@ export const Home = () => {
         audioEl.play()
     }
 
-    function getColor(colorName: string) {
-        return colors.find(color => color.name === colorName)
-    }
-
     function isCorrectMove(clickedName: string): boolean {
-        let clickedColor = getColor(clickedName)
+        let clickedColor = colors.find(color => color.name === clickedName)
         return sequence.current[playerClick.current] === clickedColor
     }
 
-    function resetGame() {
+    function resetGame(): void {
         playerClick.current = 0
         sequence.current = []
-        setLevel(1)
-        clearTimeOuts()
-        setIsPlayerMove(false)
         setIsGameOn(true)
-    }
-
-    function clearTimeOuts() {
-        timeoutIds.current.forEach(id => {
-            clearTimeout(id)
-        })
+        setLevel(1)
+        setIsInstructionsOpen(false)
     }
 
     return (
@@ -125,7 +109,7 @@ export const Home = () => {
                 <div ref={gameBoardRef} className='board'>
                     {colors.map((color, idx) => (
                         <button
-                            disabled={!isPlayerMove}
+                            disabled={!isGameOn || !isPlayerMove}
                             key={idx}
                             onClick={() => handleClick(color)}
                             className={`game-btn ${color.name}`}
@@ -135,13 +119,32 @@ export const Home = () => {
                         <h1 title='Level'>{level}</h1>
                     </div>
                 </div>
+                {isInstructionOpen ? (
+                    <div className='modal'>
+                        <Instructions resetGame={resetGame} closeModal={() => setIsInstructionsOpen(false)} />
+                    </div>
+                ) : (
+                    <button
+                        disabled={!isGameOn}
+                        onClick={() => setIsInstructionsOpen(true)}
+                        className='instructions-button btn secondary rounded medium'
+                    >
+                        Instructions
+                    </button>
+                )}
             </div>
             {!isGameOn && (
                 <div className='modal'>
-                    <h2>Game Lost!</h2>
-                    <button onClick={() => resetGame()} className='btn secondary rounded medium'>
-                        Reset
-                    </button>
+                    {!isGameOn && level === 0 ? (
+                        <Instructions resetGame={resetGame} />
+                    ) : (
+                        <div className='game-over'>
+                            <h2>Game Lost!</h2>
+                            <button onClick={resetGame} className='btn secondary rounded medium'>
+                                Reset
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
         </>

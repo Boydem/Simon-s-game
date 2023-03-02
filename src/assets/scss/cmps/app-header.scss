@@ -4,8 +4,8 @@
     padding: 1rem 0;
     border-bottom: 1px solid $gray-700;
     .wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        justify-content: center;
         align-items: center;
         .nav-links {
             justify-content: end;
@@ -16,5 +16,11 @@
         text-align: center;
         font-size: 1.5rem;
         font-weight: 300;
+    }
+    .dark-light-switch {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: $layout-padding;
     }
 }

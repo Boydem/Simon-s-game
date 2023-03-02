@@ -17,15 +17,6 @@ export function AppHeader() {
                     </button>
                 </div>
                 <div className='logo'>{title}</div>
-                <nav>
-                    <ul className='nav-links clean-list flex align-center space-inline-s'>
-                        <li className='nav-link'>
-                            <a className='btn small primary rounded' href='#'>
-                                Instructions
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </header>
     )
