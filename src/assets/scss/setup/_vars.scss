@@ -54,11 +54,11 @@ $base-muted-color: $gray-B;
 $header-height-desktop: 80px;
 
 // LAYOUT
-$layout-padding: 40px;
+$layout-padding: 2.5vw;
 
 // LAYOUT BREAKPOINTS
-$break-narrow: 768px;
+$break-narrow: 640px;
 $break-normal: 1120px;
 
-$padded-break-narrow: $break-narrow + $layout-padding * 2;
-$padded-break-normal: $break-normal + $layout-padding * 2;
+$padded-break-narrow: calc($break-narrow + $layout-padding * 2);
+$padded-break-normal: calc($break-normal + $layout-padding * 2);

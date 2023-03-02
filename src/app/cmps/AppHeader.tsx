@@ -21,11 +21,6 @@ export function AppHeader() {
                     <ul className='nav-links clean-list flex align-center space-inline-s'>
                         <li className='nav-link'>
                             <a className='btn small primary rounded' href='#'>
-                                Play!
-                            </a>
-                        </li>
-                        <li className='nav-link'>
-                            <a className='btn small secondary rounded' href='#'>
                                 Instructions
                             </a>
                         </li>

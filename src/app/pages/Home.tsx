@@ -12,7 +12,7 @@ const colors: Color[] = [
     { name: 'yellow', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3') },
     { name: 'blue', sound: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3') },
 ]
-const SHOW_HIGHLIGHT_TIME = 350
+const SHOW_HIGHLIGHT_TIME = 250
 const SHOW_HIGHLIGHT_DELAY = 1000
 
 export const Home = () => {
@@ -42,8 +42,7 @@ export const Home = () => {
     async function highlightSequence() {
         for (let i = 0; i < sequence.current.length; i++) {
             const color = sequence.current[i]
-            await utilService.delay(i === 0 ? SHOW_HIGHLIGHT_DELAY : SHOW_HIGHLIGHT_DELAY - SHOW_HIGHLIGHT_TIME)
-            console.log('playing', color)
+            await utilService.delay(i === 0 ? SHOW_HIGHLIGHT_DELAY : SHOW_HIGHLIGHT_TIME)
             await hilghlightColor(color)
         }
         setIsPlayerMove(true)
@@ -101,28 +100,30 @@ export const Home = () => {
     }
 
     return (
-        <div className='home'>
-            <div ref={gameBoardRef} className='board'>
-                {colors.map((color, idx) => (
-                    <button
-                        disabled={!isPlayerMove}
-                        key={idx}
-                        onClick={() => handleClick(color)}
-                        className={`game-btn ${color.name}`}
-                    ></button>
-                ))}
-                <div className='level'>
-                    <h1 title='Level'>{level}</h1>
-                </div>
-                {!isGameOn && (
-                    <div className='modal'>
-                        <h2>Game Lost!</h2>
-                        <button onClick={() => resetGame()} className='btn secondary rounded medium'>
-                            Reset
-                        </button>
+        <>
+            <div className='home'>
+                <div ref={gameBoardRef} className='board'>
+                    {colors.map((color, idx) => (
+                        <button
+                            disabled={!isPlayerMove}
+                            key={idx}
+                            onClick={() => handleClick(color)}
+                            className={`game-btn ${color.name}`}
+                        ></button>
+                    ))}
+                    <div className='level'>
+                        <h1 title='Level'>{level}</h1>
                     </div>
-                )}
+                </div>
             </div>
-        </div>
+            {!isGameOn && (
+                <div className='modal'>
+                    <h2>Game Lost!</h2>
+                    <button onClick={() => resetGame()} className='btn secondary rounded medium'>
+                        Reset
+                    </button>
+                </div>
+            )}
+        </>
     )
 }
