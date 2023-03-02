@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+# Simon Says - Memory Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Simon Says - a classical memory game built with React, TypeScript, Node.js, Express.js, and SASS. In this game, your objective is to repeat the sequence of colors in the correct order.
 
-## Available Scripts
+## Game Instructions
 
-In the project directory, you can run:
+### Simon Says!
 
-### `npm start`
+Watch the sequence of colors, then click on the same colors in the same order.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### How to Play
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Click the `Start` button to begin the game.
+2. Simon will show a sequence of colors in a specific order.
+3. Repeat the same sequence by clicking the colors in the same order.
+4. The game keeps track of successful rounds. Try to beat your high score.
 
-### `npm test`
+## Screenshots
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Desktop View](https://res.cloudinary.com/dsperrtyj/image/upload/v1677799896/simon-desktop_ph6xzb.png)
+  ![Mobile View](https://res.cloudinary.com/dsperrtyj/image/upload/v1677799896/simon-mobile2_barawm.png)
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This game is built using the following technologies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React: A JavaScript library for building user interfaces
+- TypeScript: A superset of JavaScript that adds static type definitions
+- Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine
+- Express.js: A minimal and flexible Node.js web application framework
+- SASS: A CSS preprocessor that adds features like variables, nested rules, and mixins
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting started
+Follow the instructions below to get started with the game:
+- #### Clone the repository
+```git clone https://github.com/Boydem/simon-says```
 
-### `npm run eject`
+- #### Install dependencies
+```npm i```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- #### Start the application
+```npm start```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- #### Navigate to http://localhost:4200 in your web browser to view the application
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+or [View the app in GithubPages](https://boydem.github.io/Simon-s-game/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Contributing
 
-## Learn More
+If you'd like to contribute to this project, please fork the repository and make changes as you'd like. Pull requests are welcome.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Conclusion
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I hope you enjoy playing Simon Says and find it challenging and fun. If you have any feedback or suggestions, please feel free to reach out. Happy gaming! :video_game:
