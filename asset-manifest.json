@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Simon-s-game/static/css/main.f1df3248.css",
-    "main.js": "/Simon-s-game/static/js/main.14e327bb.js",
+    "main.css": "/Simon-s-game/static/css/main.d3962131.css",
+    "main.js": "/Simon-s-game/static/js/main.324ddc23.js",
     "index.html": "/Simon-s-game/index.html",
-    "main.f1df3248.css.map": "/Simon-s-game/static/css/main.f1df3248.css.map",
-    "main.14e327bb.js.map": "/Simon-s-game/static/js/main.14e327bb.js.map"
+    "main.d3962131.css.map": "/Simon-s-game/static/css/main.d3962131.css.map",
+    "main.324ddc23.js.map": "/Simon-s-game/static/js/main.324ddc23.js.map"
   },
   "entrypoints": [
-    "static/css/main.f1df3248.css",
-    "static/js/main.14e327bb.js"
+    "static/css/main.d3962131.css",
+    "static/js/main.324ddc23.js"
   ]
 }
