@@ -27,7 +27,7 @@ export const Home = () => {
     const [isInstructionOpen, setIsInstructionsOpen] = useState(false)
     const sequence = useRef<Color[]>([])
     const gameBoardRef = useRef<HTMLDivElement>(null)
-    const playerClick = useRef<number>(0)
+    const playerClick = useRef<number>(-1)
     const isNewBestScore = useRef<boolean>(false)
 
     useEffect(() => {
@@ -84,7 +84,7 @@ export const Home = () => {
         if (isCorrectMove(color.name)) {
             playerClick.current++
             if (playerClick.current === level) {
-                playerClick.current = 0
+                playerClick.current = -1
                 setIsPlayerMove(false)
                 playSoundSequentially([color.sound, CORRECT_SOUND])
                 await utilService.delay(500)
@@ -94,7 +94,7 @@ export const Home = () => {
             playSound(color.sound)
             return
         }
-        if (level - 1 > bestScore) {
+        if (level > bestScore) {
             playSound(NEW_SCORE_SOUND)
             setBestScore(level)
             isNewBestScore.current = true
@@ -124,16 +124,15 @@ export const Home = () => {
 
     function isCorrectMove(clickedName: string): boolean {
         let clickedColor = colors.find(color => color.name === clickedName)
-        return sequence.current[playerClick.current] === clickedColor
+        return sequence.current[playerClick.current + 1] === clickedColor
     }
 
     function resetGame(): void {
-        playerClick.current = 0
+        playerClick.current = -1
         isNewBestScore.current = false
         sequence.current = []
         setIsPlayerMove(false)
         setIsGameOn(true)
-        setLevel(1)
         setIsInstructionsOpen(false)
     }
 
