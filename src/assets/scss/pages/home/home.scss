@@ -1,4 +1,5 @@
-$hover-shadow: 0px 0px 30px 5px;
+$highlight-shadow: 0px 0px 30px 5px;
+$highlight-shadow2: 0px 0px 10px 0.25rem;
 
 .home {
     display: flex;
@@ -36,6 +37,12 @@ $hover-shadow: 0px 0px 30px 5px;
         max-width: 95vw;
         max-height: 95vw;
         animation: fallIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        &.game-over {
+            .game-btn {
+                backdrop-filter: opacity(20%) !important;
+                -webkit-backdrop-filter: opacity(20%) !important;
+            }
+        }
         @keyframes fallIn {
             from {
                 opacity: 0;
@@ -54,19 +61,19 @@ $hover-shadow: 0px 0px 30px 5px;
         }
         &.green .game-btn.green {
             background-color: lighten($clr-1, 12%);
-            box-shadow: $hover-shadow rgba($clr-1, 50%);
+            box-shadow: $highlight-shadow rgba($clr-1, 50%), $highlight-shadow2 lighten($clr-1, 10%);
         }
         &.red .game-btn.red {
             background-color: lighten($clr-2, 12%);
-            box-shadow: $hover-shadow rgba($clr-2, 50%);
+            box-shadow: $highlight-shadow rgba($clr-2, 50%), $highlight-shadow2 lighten($clr-2, 10%);
         }
         &.yellow .game-btn.yellow {
             background-color: lighten($clr-3, 12%);
-            box-shadow: $hover-shadow rgba($clr-3, 50%);
+            box-shadow: $highlight-shadow rgba($clr-3, 50%), $highlight-shadow2 lighten($clr-3, 10%);
         }
         &.blue .game-btn.blue {
             background-color: lighten($clr-4, 12%);
-            box-shadow: $hover-shadow rgba($clr-4, 50%);
+            box-shadow: $highlight-shadow rgba($clr-4, 50%), $highlight-shadow2 lighten($clr-4, 10%);
         }
 
         .game-btn {
@@ -90,7 +97,7 @@ $hover-shadow: 0px 0px 30px 5px;
                 border-bottom-left-radius: 0.5rem;
                 &:active:not([disabled]) {
                     background-color: lighten($clr-1, 12%);
-                    box-shadow: $hover-shadow rgba($clr-1, 50%);
+                    box-shadow: $highlight-shadow rgba($clr-1, 50%);
                 }
             }
             &.red {
@@ -100,7 +107,7 @@ $hover-shadow: 0px 0px 30px 5px;
                 border-bottom-right-radius: 0.5rem;
                 &:active:not([disabled]) {
                     background-color: lighten($clr-2, 12%);
-                    box-shadow: $hover-shadow rgba($clr-2, 50%);
+                    box-shadow: $highlight-shadow rgba($clr-2, 50%);
                 }
             }
             &.yellow {
@@ -111,7 +118,7 @@ $hover-shadow: 0px 0px 30px 5px;
                 &:active:not([disabled]),
                 &.active {
                     background-color: lighten($clr-3, 12%);
-                    box-shadow: $hover-shadow rgba($clr-3, 50%);
+                    box-shadow: $highlight-shadow rgba($clr-3, 50%);
                 }
             }
             &.blue {
@@ -121,7 +128,7 @@ $hover-shadow: 0px 0px 30px 5px;
                 border-top-right-radius: 0.5rem;
                 &:active:not([disabled]) {
                     background-color: lighten($clr-4, 12%);
-                    box-shadow: $hover-shadow rgba($clr-4, 50%);
+                    box-shadow: $highlight-shadow rgba($clr-4, 50%);
                 }
             }
         }
