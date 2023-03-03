@@ -59,7 +59,7 @@ export const Home = () => {
     }, [level, isGameOn])
 
     function addNextToSequence() {
-        const randomNum = Math.floor(Math.random() * 3)
+        const randomNum = Math.floor(Math.random() * 4)
         let nextInSequence = colors[randomNum]
         sequence.current.push(nextInSequence)
     }
@@ -140,7 +140,7 @@ export const Home = () => {
     return (
         <>
             <div className='home'>
-                <div ref={gameBoardRef} className='board'>
+                <div ref={gameBoardRef} className={`board ${!isGameOn && 'game-over'}`}>
                     {colors.map((color, idx) => (
                         <button
                             disabled={!isGameOn || !isPlayerMove}
