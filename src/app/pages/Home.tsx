@@ -133,6 +133,7 @@ export const Home = () => {
         sequence.current = []
         setIsPlayerMove(false)
         setIsGameOn(true)
+        setLevel(0)
         setIsInstructionsOpen(false)
     }
 
