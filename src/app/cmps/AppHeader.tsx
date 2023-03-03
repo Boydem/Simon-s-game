@@ -13,7 +13,7 @@ export function AppHeader() {
             <div className='wrapper'>
                 <div className='dark-light-switch'>
                     <button onClick={toggleDarkMode} className='btn small primary rounded'>
-                        {darkMode ? 'Dark' : 'Light'}
+                        {darkMode ? 'Light' : 'Dark'}
                     </button>
                 </div>
                 <div className='logo'>{title}</div>
