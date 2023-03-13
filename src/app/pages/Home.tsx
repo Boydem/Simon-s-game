@@ -25,6 +25,8 @@ export const Home = () => {
     const [isGameOn, setIsGameOn] = useState(false)
     const [isPlayerMove, setIsPlayerMove] = useState(false)
     const [isInstructionOpen, setIsInstructionsOpen] = useState(false)
+    const [highlightSpeed, setHighlightSpeed] = useState<number>(SHOW_HIGHLIGHT_TIME)
+
     const sequence = useRef<Color[]>([])
     const gameBoardRef = useRef<HTMLDivElement>(null)
     const playerClick = useRef<number>(-1)
@@ -58,6 +60,18 @@ export const Home = () => {
         highlightSequence()
     }, [level, isGameOn])
 
+    function updateHighlightSpeed(level: number) {
+        if (level === 3) {
+            setHighlightSpeed(SHOW_HIGHLIGHT_TIME - 50)
+        } else if (level === 5) {
+            setHighlightSpeed(SHOW_HIGHLIGHT_TIME - 100)
+        } else if (level === 7) {
+            setHighlightSpeed(SHOW_HIGHLIGHT_TIME - 150)
+        } else if (level === 10) {
+            setHighlightSpeed(SHOW_HIGHLIGHT_TIME - 200)
+        }
+    }
+
     function addNextToSequence() {
         const randomNum = Math.floor(Math.random() * 4)
         let nextInSequence = colors[randomNum]
@@ -67,7 +81,7 @@ export const Home = () => {
     async function highlightSequence() {
         for (let i = 0; i < sequence.current.length; i++) {
             const color = sequence.current[i]
-            await utilService.delay(i === 0 ? SHOW_HIGHLIGHT_DELAY : SHOW_HIGHLIGHT_TIME)
+            await utilService.delay(i === 0 ? SHOW_HIGHLIGHT_DELAY : highlightSpeed)
             await hilghlightColor(color)
         }
         setIsPlayerMove(true)
@@ -89,6 +103,7 @@ export const Home = () => {
                 playSoundSequentially([color.sound, CORRECT_SOUND])
                 await utilService.delay(500)
                 setLevel(prev => prev + 1)
+                updateHighlightSpeed(level + 1)
                 return
             }
             playSound(color.sound)
@@ -168,6 +183,10 @@ export const Home = () => {
                                     Instructions
                                 </button>
                                 <span className='best-score'>Best Score: {bestScore}</span>
+                                <span className='difficulty'>
+                                    Difficulty level:{' '}
+                                    {level < 3 ? 'Warmup' : level < 5 ? 'Easy' : level < 7 ? 'Medium' : 'Hard'}
+                                </span>
                             </>
                         )}
                     </>
