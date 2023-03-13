@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/simon-frontend/static/css/main.2e643b0b.css",
-    "main.js": "/simon-frontend/static/js/main.d1692884.js",
+    "main.css": "/simon-frontend/static/css/main.8f2a9c16.css",
+    "main.js": "/simon-frontend/static/js/main.fb1e1f76.js",
     "index.html": "/simon-frontend/index.html",
-    "main.2e643b0b.css.map": "/simon-frontend/static/css/main.2e643b0b.css.map",
-    "main.d1692884.js.map": "/simon-frontend/static/js/main.d1692884.js.map"
+    "main.8f2a9c16.css.map": "/simon-frontend/static/css/main.8f2a9c16.css.map",
+    "main.fb1e1f76.js.map": "/simon-frontend/static/js/main.fb1e1f76.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e643b0b.css",
-    "static/js/main.d1692884.js"
+    "static/css/main.8f2a9c16.css",
+    "static/js/main.fb1e1f76.js"
   ]
 }
