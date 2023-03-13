@@ -41,7 +41,7 @@ Follow the instructions below to get started with the game:
 - #### Start the application
 ```npm start```
 
-- #### Navigate to http://localhost:4200 in your web browser to view the application
+- #### Navigate to http://localhost:3000 in your web browser to view the application
 
 or [View the app in GithubPages](https://boydem.github.io/simon-frontend/)
 
